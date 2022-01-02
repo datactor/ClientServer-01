@@ -17,7 +17,10 @@ fn main() {
                 match stream.read(&mut data) {
                     Ok(_) => {
                         if &data[0..input.len()] == msg {
-                            println!("Receiving Message : {}" , from_utf8(&data[0..input.len()-1]).unwrap());
+                            println!(
+                                "Receiving Message : {}",
+                                from_utf8(&data[0..input.len()-1]).unwrap()
+                            );
                         } else {
                             let text = from_utf8(&data).unwrap();
                             println!("Unexpected reply: {}", text);
