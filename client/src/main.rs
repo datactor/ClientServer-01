@@ -1,7 +1,6 @@
 use std::net::{TcpStream};
 use std::io::{Read, Write};
 use std::str::from_utf8;
-use std::str;
 
 fn main() {
     match TcpStream::connect("localhost:3333") {
@@ -17,12 +16,12 @@ fn main() {
                 let mut data = [0 as u8; 256]; // using 256 byte buffer
                 match stream.read(&mut data) {
                     Ok(_) => {
-                        let text = str::from_utf8(&data[0..input.len()]).unwrap();
-                        if text.eq(&input) {
+                        if &data[0..input.len()] == msg {
                             println!("Receiving Message : {}" , from_utf8(&data[0..input.len()-1]).unwrap());
                         } else {
                             let text = from_utf8(&data).unwrap();
                             println!("Unexpected reply: {}", text);
+                            break;
                         }
                     },
                     Err(e) => {
