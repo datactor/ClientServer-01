@@ -13,7 +13,7 @@ fn main() {
 
                 stream.write(msg).unwrap();
 
-                let mut data = [0 as u8; 256]; // using 256 byte buffer
+                let mut data = [0 as u8; 256]; // using 256 byte buffer(constant)
                 match stream.read(&mut data) {
                     Ok(_) => {
                         if &data[0..input.len()] == msg {
